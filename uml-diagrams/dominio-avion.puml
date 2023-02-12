@@ -1,0 +1,43 @@
+@startuml
+class Pasajero {
+  +nombre: string
+  +id: string
+}
+
+class Asiento {
+  +numero: int
+  +clases: string
+  +posicion: string
+  +pasajero: Pasajero
+}
+
+class Avion {
+  -Asientos: Asiento[]
+  +Asignar_asiento(passenger: Passenger, seat_number: int, class: string, position: string): void
+  +Eliminar_reserva(passenger_id: string): void
+  +Buscar_pasajero(passenger_id: string): Seat
+  +porcentaje_ocupacion(): float
+}
+
+class Sistema_reservacion {
+  -Avion: Avion
+  +Hacer_reservacion(passenger: Passenger, seat_number: int, class: string, position: string): void
+  +Cancelar_reservacion(passenger_id: string): void
+  +Buscar_pasajero(passenger_id: string): Seat
+  +porcentaje_ocupacion(): float
+}
+class AsientoEconomico {
+  + Asiento_Economico(Fila: int, Columna: int)
+}
+
+class AsientoEjecutivo {
+  + Asiento_Ejecutivo(Fila: int, Columna: int)
+}
+
+Pasajero "1" *-- "1" Asiento
+Asiento "1" *-- "1" Avion
+Asiento --> AsientoEconomico
+Asiento --> AsientoEjecutivo
+Sistema_reservacion "1" *-- "1" Avion
+Sistema_reservacion --> Asiento
+@enduml
